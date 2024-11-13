@@ -132,8 +132,20 @@
     <Compile Include="Teacher.vb">
       <SubType>Form</SubType>
     </Compile>
+<<<<<<< Updated upstream
     <Compile Include="Login.vb">
       <SubType>Form</SubType>
+=======
+    <Compile Include="Dashboard.Designer.vb">
+      <DependentUpon>Dashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBConnection.vb" />
+    <Compile Include="LoginForm.Designer.vb">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+>>>>>>> Stashed changes
     </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
@@ -149,6 +161,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -160,10 +173,47 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+<<<<<<< Updated upstream
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+=======
+    <Compile Include="RegistrationForm.Designer.vb">
+      <DependentUpon>RegistrationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentForm.Designer.vb">
+      <DependentUpon>StudentForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StudentForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubjectForm.Designer.vb">
+      <DependentUpon>SubjectForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeacherForm.Designer.vb">
+      <DependentUpon>TeacherForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClassForm.resx">
+      <DependentUpon>ClassForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+>>>>>>> Stashed changes
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -171,8 +221,22 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+<<<<<<< Updated upstream
     <EmbeddedResource Include="Student.resx">
       <DependentUpon>Student.vb</DependentUpon>
+=======
+    <EmbeddedResource Include="RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentForm.resx">
+      <DependentUpon>StudentForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubjectForm.resx">
+      <DependentUpon>SubjectForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherForm.resx">
+      <DependentUpon>TeacherForm.vb</DependentUpon>
+>>>>>>> Stashed changes
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
