@@ -14,6 +14,21 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -125,17 +140,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseConnection.vb" />
-    <Compile Include="Teacher.Designer.vb">
-      <DependentUpon>Teacher.vb</DependentUpon>
+    <Compile Include="ClassForm.Designer.vb">
+      <DependentUpon>ClassForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Teacher.vb">
+    <Compile Include="ClassForm.vb">
       <SubType>Form</SubType>
     </Compile>
-<<<<<<< Updated upstream
-    <Compile Include="Login.vb">
-      <SubType>Form</SubType>
-=======
     <Compile Include="Dashboard.Designer.vb">
       <DependentUpon>Dashboard.vb</DependentUpon>
     </Compile>
@@ -145,16 +155,8 @@
     <Compile Include="DBConnection.vb" />
     <Compile Include="LoginForm.Designer.vb">
       <DependentUpon>LoginForm.vb</DependentUpon>
->>>>>>> Stashed changes
     </Compile>
-    <Compile Include="Login.Designer.vb">
-      <DependentUpon>Login.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Student.Designer.vb">
-      <DependentUpon>Student.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Student.vb">
+    <Compile Include="LoginForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -173,16 +175,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-<<<<<<< Updated upstream
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.vb</DependentUpon>
-=======
     <Compile Include="RegistrationForm.Designer.vb">
       <DependentUpon>RegistrationForm.vb</DependentUpon>
     </Compile>
     <Compile Include="RegistrationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffForm.Designer.vb">
+      <DependentUpon>StaffForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StaffForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StudentForm.Designer.vb">
@@ -203,6 +205,12 @@
     <Compile Include="TeacherForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TeacherUIForm.Designer.vb">
+      <DependentUpon>TeacherUIForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherUIForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClassForm.resx">
@@ -213,7 +221,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
->>>>>>> Stashed changes
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -221,12 +228,11 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-<<<<<<< Updated upstream
-    <EmbeddedResource Include="Student.resx">
-      <DependentUpon>Student.vb</DependentUpon>
-=======
     <EmbeddedResource Include="RegistrationForm.resx">
       <DependentUpon>RegistrationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffForm.resx">
+      <DependentUpon>StaffForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StudentForm.resx">
       <DependentUpon>StudentForm.vb</DependentUpon>
@@ -236,7 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherForm.resx">
       <DependentUpon>TeacherForm.vb</DependentUpon>
->>>>>>> Stashed changes
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherUIForm.resx">
+      <DependentUpon>TeacherUIForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +259,21 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -256,4 +256,5 @@ Public Class RegistrationForm
     Private Sub btnEmailSlip_Click(sender As Object, e As EventArgs) Handles btnEmailSlip.Click
         PrepareEmailContent()
     End Sub
+
 End Class

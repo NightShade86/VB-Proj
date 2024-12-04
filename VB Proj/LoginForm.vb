@@ -5,8 +5,8 @@ Public Class LoginForm
         ' Connect to the database
         ConnectDB()
 
-        ' SQL query to fetch Username, Password, and UserType
-        Dim query As String = "SELECT UserType, FullName FROM Users WHERE Username=@Username AND Password=@Password"
+        ' SQL query to fetch Username, Password, UserType, and UserID
+        Dim query As String = "SELECT UserID, UserType, FullName FROM Users WHERE Username=@Username AND Password=@Password"
         Dim cmd As New MySqlCommand(query, conn)
 
         ' Using parameters to prevent SQL injection
@@ -22,6 +22,7 @@ Public Class LoginForm
 
             ' Check if user exists
             If reader.Read() Then
+                Dim userID As Integer = Convert.ToInt32(reader("UserID"))
                 Dim userType As String = reader("UserType").ToString()
                 Dim fullName As String = reader("FullName").ToString()
                 MessageBox.Show("Welcome, " & fullName & "!", "Login Successful")
@@ -35,8 +36,10 @@ Public Class LoginForm
                         Dim registrarForm As New Dashboard()
                         registrarForm.Show()
                     Case "Teacher"
-                        Dim teacherForm As New Dashboard()
+                        ' Pass the actual UserID to TeacherUIForm
+                        Dim teacherForm As New TeacherUIForm(userID) ' Pass UserID (integer)
                         teacherForm.Show()
+                        Me.Hide()
                     Case Else
                         MessageBox.Show("Unknown UserType!")
                 End Select
@@ -60,4 +63,5 @@ Public Class LoginForm
             End If
         End Try
     End Sub
+
 End Class

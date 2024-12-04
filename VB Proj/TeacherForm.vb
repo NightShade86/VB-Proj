@@ -80,36 +80,53 @@ Public Class TeacherForm
             Return
         End If
 
-        Dim teacherID As String = dgvTeachers.SelectedRows(0).Cells(0).Value.ToString()
-        Dim userID As String = dgvTeachers.SelectedRows(0).Cells(4).Value.ToString() ' UserID for deleting from users table
+        ' Get the necessary values from the selected row
+        Dim teacherICNumber As String = dgvTeachers.SelectedRows(0).Cells("ICNumber").Value.ToString()
+        Dim userID As Integer = Convert.ToInt32(dgvTeachers.SelectedRows(0).Cells("UserID").Value.ToString()) ' Get UserID directly
+
+        ' Confirm delete action
+        Dim confirmDelete As DialogResult = MessageBox.Show("Are you sure you want to delete this teacher?", "Confirm Delete", MessageBoxButtons.YesNo)
+        If confirmDelete = DialogResult.No Then
+            Return
+        End If
 
         ' Open the connection
         ConnectDB()
 
-        ' Delete teacher from teacher table
-        Dim deleteTeacherQuery As String = "DELETE FROM teacher WHERE ICNumber = @ICNumber"
+        ' Start a transaction to ensure atomicity of the delete operation
+        Dim transaction As MySqlTransaction = DBConnection.conn.BeginTransaction()
 
-        Using cmd As New MySqlCommand(deleteTeacherQuery, DBConnection.conn)
-            cmd.Parameters.AddWithValue("@ICNumber", teacherID)
-            Try
+        Try
+            ' Delete teacher from the teacher table
+            Dim deleteTeacherQuery As String = "DELETE FROM teacher WHERE ICNumber = @ICNumber"
+            Using cmd As New MySqlCommand(deleteTeacherQuery, DBConnection.conn, transaction)
+                cmd.Parameters.AddWithValue("@ICNumber", teacherICNumber)
                 cmd.ExecuteNonQuery()
-                ' Delete user from users table
-                Dim deleteUserQuery As String = "DELETE FROM users WHERE UserID = @UserID"
-                cmd.CommandText = deleteUserQuery
-                cmd.Parameters.Clear()
+            End Using
+
+            ' Now delete user from the users table
+            Dim deleteUserQuery As String = "DELETE FROM users WHERE UserID = @UserID"
+            Using cmd As New MySqlCommand(deleteUserQuery, DBConnection.conn, transaction)
                 cmd.Parameters.AddWithValue("@UserID", userID)
-
                 cmd.ExecuteNonQuery()
-                MessageBox.Show("Teacher Deleted Successfully!")
-                LoadTeacherList() ' Refresh the DataGridView
-            Catch ex As Exception
-                MessageBox.Show("Error deleting teacher: " & ex.Message)
-            End Try
-        End Using
+            End Using
 
-        ' Close the connection
-        DBConnection.conn.Close()
+            ' Commit the transaction
+            transaction.Commit()
+
+            MessageBox.Show("Teacher Deleted Successfully!")
+            LoadTeacherList() ' Refresh the DataGridView
+        Catch ex As Exception
+            ' Rollback transaction in case of an error
+            transaction.Rollback()
+            MessageBox.Show("Error deleting teacher: " & ex.Message)
+        Finally
+            ' Close the connection
+            DBConnection.conn.Close()
+        End Try
     End Sub
+
+
 
     ' Update teacher information (REQ404)
     Private Sub btnUpdateTeacher_Click(sender As Object, e As EventArgs) Handles btnUpdateTeacher.Click
@@ -124,44 +141,49 @@ Public Class TeacherForm
             Return
         End If
 
-
-        Dim teacherID As String = dgvTeachers.SelectedRows(0).Cells(0).Value.ToString()
-        Dim userID As String = dgvTeachers.SelectedRows(0).Cells(4).Value.ToString() ' UserID for update
+        Dim teacherID As String = dgvTeachers.SelectedRows(0).Cells("ICNumber").Value.ToString()
+        Dim userID As String = dgvTeachers.SelectedRows(0).Cells("UserID").Value.ToString() ' UserID for update
 
         ' Open the connection
         ConnectDB()
 
-        ' Update teacher in teacher table
-        Dim updateTeacherQuery As String = "UPDATE teacher SET ICNumber = @ICNumber, Name = @Name, Subject = @Subject, Phone = @Phone WHERE ICNumber = @OldICNumber"
+        Try
+            ' Update teacher in teacher table
+            Dim updateTeacherQuery As String = "UPDATE teacher SET ICNumber = @ICNumber, Name = @Name, Subject = @Subject, Phone = @Phone WHERE ICNumber = @OldICNumber"
 
-        Using cmd As New MySqlCommand(updateTeacherQuery, DBConnection.conn)
-            cmd.Parameters.AddWithValue("@ICNumber", txtICNumber.Text)
-            cmd.Parameters.AddWithValue("@Name", txtName.Text)
-            cmd.Parameters.AddWithValue("@Subject", cmbSubject.Text)
-            cmd.Parameters.AddWithValue("@Phone", txtPhone.Text)
-            cmd.Parameters.AddWithValue("@OldICNumber", teacherID)
+            Using cmd As New MySqlCommand(updateTeacherQuery, DBConnection.conn)
+                cmd.Parameters.AddWithValue("@ICNumber", txtICNumber.Text)
+                cmd.Parameters.AddWithValue("@Name", txtName.Text)
+                cmd.Parameters.AddWithValue("@Subject", cmbSubject.Text)
+                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text)
+                cmd.Parameters.AddWithValue("@OldICNumber", teacherID)
 
-            Try
                 cmd.ExecuteNonQuery()
-                ' Update user details in users table
-                Dim updateUserQuery As String = "UPDATE users SET Username = @Username, FullName = @FullName WHERE UserID = @UserID"
-                cmd.CommandText = updateUserQuery
-                cmd.Parameters.Clear()
+            End Using
+
+            ' Update user details in users table, including password (plain text)
+            Dim updateUserQuery As String = "UPDATE users SET Username = @Username, Password = @Password, FullName = @FullName WHERE UserID = @UserID"
+
+            Using cmd As New MySqlCommand(updateUserQuery, DBConnection.conn)
                 cmd.Parameters.AddWithValue("@Username", txtUsername.Text)
+                cmd.Parameters.AddWithValue("@Password", txtPassword.Text) ' Update password as plain text
                 cmd.Parameters.AddWithValue("@FullName", txtName.Text)
                 cmd.Parameters.AddWithValue("@UserID", userID)
 
                 cmd.ExecuteNonQuery()
-                MessageBox.Show("Teacher Updated Successfully!")
-                LoadTeacherList() ' Refresh the DataGridView
-            Catch ex As Exception
-                MessageBox.Show("Error updating teacher: " & ex.Message)
-            End Try
-        End Using
+            End Using
 
-        ' Close the connection
-        DBConnection.conn.Close()
+            MessageBox.Show("Teacher Updated Successfully!")
+            LoadTeacherList() ' Refresh the DataGridView
+        Catch ex As Exception
+            MessageBox.Show("Error updating teacher: " & ex.Message)
+        Finally
+            ' Close the connection
+            DBConnection.conn.Close()
+        End Try
     End Sub
+
+
 
     ' Search teacher by IC number (REQ405)
     Private Sub btnSearchByIC_Click(sender As Object, e As EventArgs) Handles btnSearchByIC.Click
@@ -253,6 +275,26 @@ Public Class TeacherForm
             End Try
         End Using
     End Sub
+    ' Handle DataGridView CellClick event to fill textboxes with selected teacher's data
+    Private Sub dgvTeachers_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTeachers.CellClick
+        If e.RowIndex >= 0 Then
+            ' Get the selected teacher's details from the DataGridView row
+            Dim row As DataGridViewRow = dgvTeachers.Rows(e.RowIndex)
+
+            ' Populate the textboxes with the selected teacher's data
+            txtICNumber.Text = row.Cells("ICNumber").Value.ToString()
+            txtName.Text = row.Cells("Name").Value.ToString()
+            txtPhone.Text = row.Cells("Phone").Value.ToString()
+            txtUsername.Text = row.Cells("Username").Value.ToString()
+
+            ' Set the subject in the ComboBox
+            Dim subject As String = row.Cells("Subject").Value.ToString()
+            If cmbSubject.Items.Contains(subject) Then
+                cmbSubject.SelectedItem = subject
+            End If
+        End If
+    End Sub
+
 
 
 End Class

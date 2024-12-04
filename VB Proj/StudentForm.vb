@@ -31,22 +31,52 @@ Public Class StudentForm
 
     ' Display students in the DataGridView
     Private Sub DisplayStudentList()
-        Dim query As String = "SELECT Student.ICNumber, Student.Name, Student.Gender, Student.Address, Student.Phone, Student.Email, Class.ClassName 
-                               FROM Student 
-                               INNER JOIN Class ON Student.ClassID = Class.ClassID"
+        Dim query As String = "SELECT Student.ICNumber, Student.Name, Student.Gender, Student.Address, Student.Phone, Student.Email, Student.Class 
+                               FROM Student"
         Dim adapter As New MySqlDataAdapter(query, conn)
         Dim table As New DataTable()
         adapter.Fill(table)
         dgvStudent.DataSource = table
     End Sub
 
+    ' Handle DataGridView CellClick event to fill textboxes with selected student's data
+    Private Sub dgvStudent_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudent.CellClick
+        If e.RowIndex >= 0 Then
+            ' Get the selected student's details from the DataGridView row
+            Dim row As DataGridViewRow = dgvStudent.Rows(e.RowIndex)
+
+            ' Populate the textboxes with the selected student's data
+            txtICNumber.Text = row.Cells("ICNumber").Value.ToString()
+            txtName.Text = row.Cells("Name").Value.ToString()
+            txtGender.Text = row.Cells("Gender").Value.ToString()
+            txtAddress.Text = row.Cells("Address").Value.ToString()
+            txtPhone.Text = row.Cells("Phone").Value.ToString()
+            txtEmail.Text = row.Cells("Email").Value.ToString()
+
+            ' Set ComboBox selection based on the selected student's class
+            Dim className As String = row.Cells("Class").Value.ToString()
+
+            ' Ensure that the className is not null or empty
+            If Not String.IsNullOrEmpty(className) Then
+                For Each item In CMBclass.Items
+                    If item.ClassName = className Then
+                        CMBclass.SelectedItem = item
+                        Exit For
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
+
     ' Add a new student record
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        ' Get selected ClassID from ComboBox
+        ' Get selected Class from ComboBox
         Dim selectedClass = CType(CMBclass.SelectedItem, Object)
 
-        Dim query As String = "INSERT INTO Student (ICNumber, Name, Gender, Address, Phone, Email, ClassID) 
-                               VALUES (@ICNumber, @Name, @Gender, @Address, @Phone, @Email, @ClassID)"
+        ' Insert using the Class name from ComboBox, not ClassID
+        Dim query As String = "INSERT INTO Student (ICNumber, Name, Gender, Address, Phone, Email, Class) 
+                               VALUES (@ICNumber, @Name, @Gender, @Address, @Phone, @Email, @Class)"
         Dim cmd As New MySqlCommand(query, conn)
 
         cmd.Parameters.AddWithValue("@ICNumber", txtICNumber.Text.ToUpper()) ' Ensure input is uppercase
@@ -55,7 +85,7 @@ Public Class StudentForm
         cmd.Parameters.AddWithValue("@Address", txtAddress.Text.ToUpper()) ' Ensure input is uppercase
         cmd.Parameters.AddWithValue("@Phone", txtPhone.Text)
         cmd.Parameters.AddWithValue("@Email", txtEmail.Text) ' Added Email parameter
-        cmd.Parameters.AddWithValue("@ClassID", selectedClass.ClassID)
+        cmd.Parameters.AddWithValue("@Class", selectedClass.ClassName) ' Insert class name, not ClassID
 
         Try
             cmd.ExecuteNonQuery()
@@ -67,29 +97,39 @@ Public Class StudentForm
     End Sub
 
     ' Update an existing student record
+    ' Update an existing student record
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        ' Get selected ClassID from ComboBox
+        ' Check if an ICNumber is selected
+        If String.IsNullOrEmpty(txtICNumber.Text) Then
+            MessageBox.Show("Please select a student from the list to update.")
+            Return
+        End If
+
+        ' Get selected Class from ComboBox
         Dim selectedClass = CType(CMBclass.SelectedItem, Object)
 
-        Dim query As String = "UPDATE Student SET Name=@Name, Gender=@Gender, Address=@Address, Phone=@Phone, Email=@Email, ClassID=@ClassID WHERE ICNumber=@ICNumber"
+        ' Update using the Class name from ComboBox, not ClassID
+        Dim query As String = "UPDATE Student SET Name=@Name, Gender=@Gender, Address=@Address, Phone=@Phone, Email=@Email, Class=@Class WHERE ICNumber=@ICNumber"
         Dim cmd As New MySqlCommand(query, conn)
 
+        ' Ensure input is uppercase and prevent SQL injection
         cmd.Parameters.AddWithValue("@ICNumber", txtICNumber.Text.ToUpper()) ' Ensure input is uppercase
         cmd.Parameters.AddWithValue("@Name", txtName.Text.ToUpper()) ' Ensure input is uppercase
         cmd.Parameters.AddWithValue("@Gender", txtGender.Text.ToUpper()) ' Ensure input is uppercase
         cmd.Parameters.AddWithValue("@Address", txtAddress.Text.ToUpper()) ' Ensure input is uppercase
         cmd.Parameters.AddWithValue("@Phone", txtPhone.Text)
         cmd.Parameters.AddWithValue("@Email", txtEmail.Text) ' Added Email parameter
-        cmd.Parameters.AddWithValue("@ClassID", selectedClass.ClassID)
+        cmd.Parameters.AddWithValue("@Class", selectedClass.ClassName) ' Update class with ClassName
 
         Try
             cmd.ExecuteNonQuery()
             MessageBox.Show("Student updated successfully!")
-            DisplayStudentList()
+            DisplayStudentList() ' Refresh the student list
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         End Try
     End Sub
+
 
     ' Delete a student record
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -121,10 +161,10 @@ Public Class StudentForm
             txtPhone.Text = reader("Phone").ToString()
             txtEmail.Text = reader("Email").ToString() ' Added Email field handling
 
-            ' Set ComboBox selection based on ClassID
-            Dim classID = Convert.ToInt32(reader("ClassID"))
+            ' Set ComboBox selection based on Class name
+            Dim className = reader("Class").ToString()
             For Each item In CMBclass.Items
-                If item.ClassID = classID Then
+                If item.ClassName = className Then
                     CMBclass.SelectedItem = item
                     Exit For
                 End If

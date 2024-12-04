@@ -41,173 +41,202 @@ Partial Class TeacherForm
         Me.dgvTeachers = New System.Windows.Forms.DataGridView()
         Me.btnClearFields = New System.Windows.Forms.Button()
         Me.cmbSubject = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.dgvTeachers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtICNumber
         '
-        Me.txtICNumber.Location = New System.Drawing.Point(435, 31)
+        Me.txtICNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtICNumber.Location = New System.Drawing.Point(394, 128)
         Me.txtICNumber.Name = "txtICNumber"
-        Me.txtICNumber.Size = New System.Drawing.Size(121, 20)
+        Me.txtICNumber.Size = New System.Drawing.Size(207, 26)
         Me.txtICNumber.TabIndex = 0
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(435, 162)
+        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(394, 331)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(121, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(207, 26)
         Me.txtPassword.TabIndex = 1
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(435, 57)
+        Me.txtName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.Location = New System.Drawing.Point(394, 167)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(121, 20)
+        Me.txtName.Size = New System.Drawing.Size(207, 26)
         Me.txtName.TabIndex = 2
         '
         'txtPhone
         '
-        Me.txtPhone.Location = New System.Drawing.Point(435, 109)
+        Me.txtPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPhone.Location = New System.Drawing.Point(394, 251)
         Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(121, 20)
+        Me.txtPhone.Size = New System.Drawing.Size(207, 26)
         Me.txtPhone.TabIndex = 4
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(435, 136)
+        Me.txtUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsername.Location = New System.Drawing.Point(394, 292)
         Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(121, 20)
+        Me.txtUsername.Size = New System.Drawing.Size(207, 26)
         Me.txtUsername.TabIndex = 5
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(374, 34)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(284, 131)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(17, 13)
+        Me.Label1.Size = New System.Drawing.Size(25, 20)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "IC"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(374, 60)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(284, 170)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(35, 13)
+        Me.Label2.Size = New System.Drawing.Size(51, 20)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Name"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(374, 86)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(284, 214)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(43, 13)
+        Me.Label3.Size = New System.Drawing.Size(63, 20)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Subject"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(374, 112)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(284, 254)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 13)
+        Me.Label4.Size = New System.Drawing.Size(55, 20)
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "Phone"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(374, 139)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(284, 295)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(55, 13)
+        Me.Label5.Size = New System.Drawing.Size(83, 20)
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Username"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(374, 165)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(284, 334)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(53, 13)
+        Me.Label6.Size = New System.Drawing.Size(78, 20)
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "Password"
         '
         'btnSearchByName
         '
-        Me.btnSearchByName.Location = New System.Drawing.Point(322, 202)
+        Me.btnSearchByName.Location = New System.Drawing.Point(612, 167)
         Me.btnSearchByName.Name = "btnSearchByName"
-        Me.btnSearchByName.Size = New System.Drawing.Size(118, 23)
+        Me.btnSearchByName.Size = New System.Drawing.Size(114, 26)
         Me.btnSearchByName.TabIndex = 12
         Me.btnSearchByName.Text = "Search by Name"
         Me.btnSearchByName.UseVisualStyleBackColor = True
         '
         'btnSearchByIC
         '
-        Me.btnSearchByIC.Location = New System.Drawing.Point(390, 243)
+        Me.btnSearchByIC.Location = New System.Drawing.Point(612, 128)
         Me.btnSearchByIC.Name = "btnSearchByIC"
-        Me.btnSearchByIC.Size = New System.Drawing.Size(114, 23)
+        Me.btnSearchByIC.Size = New System.Drawing.Size(114, 26)
         Me.btnSearchByIC.TabIndex = 13
         Me.btnSearchByIC.Text = "Search by IC"
         Me.btnSearchByIC.UseVisualStyleBackColor = True
         '
         'btnUpdateTeacher
         '
-        Me.btnUpdateTeacher.Location = New System.Drawing.Point(216, 225)
+        Me.btnUpdateTeacher.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnUpdateTeacher.Location = New System.Drawing.Point(445, 376)
         Me.btnUpdateTeacher.Name = "btnUpdateTeacher"
-        Me.btnUpdateTeacher.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateTeacher.Size = New System.Drawing.Size(97, 35)
         Me.btnUpdateTeacher.TabIndex = 14
         Me.btnUpdateTeacher.Text = "Update"
-        Me.btnUpdateTeacher.UseVisualStyleBackColor = True
+        Me.btnUpdateTeacher.UseVisualStyleBackColor = False
         '
         'btnDeleteTeacher
         '
-        Me.btnDeleteTeacher.Location = New System.Drawing.Point(272, 155)
+        Me.btnDeleteTeacher.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnDeleteTeacher.Location = New System.Drawing.Point(330, 376)
         Me.btnDeleteTeacher.Name = "btnDeleteTeacher"
-        Me.btnDeleteTeacher.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteTeacher.Size = New System.Drawing.Size(97, 35)
         Me.btnDeleteTeacher.TabIndex = 15
         Me.btnDeleteTeacher.Text = "Delete"
-        Me.btnDeleteTeacher.UseVisualStyleBackColor = True
+        Me.btnDeleteTeacher.UseVisualStyleBackColor = False
         '
         'btnAddTeacher
         '
-        Me.btnAddTeacher.Location = New System.Drawing.Point(258, 112)
+        Me.btnAddTeacher.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnAddTeacher.Location = New System.Drawing.Point(564, 376)
         Me.btnAddTeacher.Name = "btnAddTeacher"
-        Me.btnAddTeacher.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddTeacher.Size = New System.Drawing.Size(97, 35)
         Me.btnAddTeacher.TabIndex = 16
         Me.btnAddTeacher.Text = "Add"
-        Me.btnAddTeacher.UseVisualStyleBackColor = True
+        Me.btnAddTeacher.UseVisualStyleBackColor = False
         '
         'dgvTeachers
         '
         Me.dgvTeachers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTeachers.Location = New System.Drawing.Point(12, 28)
+        Me.dgvTeachers.Location = New System.Drawing.Point(12, 128)
         Me.dgvTeachers.Name = "dgvTeachers"
-        Me.dgvTeachers.Size = New System.Drawing.Size(240, 150)
+        Me.dgvTeachers.Size = New System.Drawing.Size(225, 229)
         Me.dgvTeachers.TabIndex = 17
         '
         'btnClearFields
         '
-        Me.btnClearFields.Location = New System.Drawing.Point(121, 202)
+        Me.btnClearFields.BackColor = System.Drawing.Color.White
+        Me.btnClearFields.Location = New System.Drawing.Point(330, 429)
         Me.btnClearFields.Name = "btnClearFields"
-        Me.btnClearFields.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearFields.Size = New System.Drawing.Size(331, 47)
         Me.btnClearFields.TabIndex = 18
         Me.btnClearFields.Text = "Clear"
-        Me.btnClearFields.UseVisualStyleBackColor = True
+        Me.btnClearFields.UseVisualStyleBackColor = False
         '
         'cmbSubject
         '
+        Me.cmbSubject.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSubject.FormattingEnabled = True
-        Me.cmbSubject.Location = New System.Drawing.Point(435, 82)
+        Me.cmbSubject.Location = New System.Drawing.Point(394, 211)
         Me.cmbSubject.Name = "cmbSubject"
-        Me.cmbSubject.Size = New System.Drawing.Size(121, 21)
+        Me.cmbSubject.Size = New System.Drawing.Size(207, 28)
         Me.cmbSubject.TabIndex = 19
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Arial", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(211, 41)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(344, 41)
+        Me.Label7.TabIndex = 20
+        Me.Label7.Text = "Teacher Information"
         '
         'TeacherForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(600, 293)
+        Me.BackColor = System.Drawing.Color.Gainsboro
+        Me.ClientSize = New System.Drawing.Size(780, 514)
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.cmbSubject)
         Me.Controls.Add(Me.btnClearFields)
         Me.Controls.Add(Me.dgvTeachers)
@@ -254,4 +283,5 @@ Partial Class TeacherForm
     Friend WithEvents txtPhone As TextBox
     Friend WithEvents btnClearFields As Button
     Friend WithEvents cmbSubject As ComboBox
+    Friend WithEvents Label7 As Label
 End Class

@@ -44,6 +44,14 @@
         AddHandler teacherForm.FormClosed, AddressOf TeacherForm_FormClosed ' Add handler for form close
     End Sub
 
+    ' Button click event to open StaffForm and hide Dashboard
+    Private Sub ButtonManageStaff_Click(sender As Object, e As EventArgs) Handles ButtonManageStaff.Click
+        Dim staffForm As New StaffForm()
+        staffForm.Show() ' Show StaffForm
+        Me.Hide() ' Hide Dashboard while StaffForm is open
+        AddHandler staffForm.FormClosed, AddressOf StaffForm_FormClosed ' Add handler for form close
+    End Sub
+
     ' Event handler for when ClassForm is closed
     Private Sub ClassForm_FormClosed(sender As Object, e As FormClosedEventArgs)
         Me.Show() ' Show Dashboard again when ClassForm is closed
@@ -67,5 +75,15 @@
     ' Event handler for when TeacherForm is closed
     Private Sub TeacherForm_FormClosed(sender As Object, e As FormClosedEventArgs)
         Me.Show() ' Show Dashboard again when TeacherForm is closed
+    End Sub
+
+    ' Event handler for when StaffForm is closed
+    Private Sub StaffForm_FormClosed(sender As Object, e As FormClosedEventArgs)
+        Me.Show() ' Show Dashboard again when StaffForm is closed
+    End Sub
+
+    ' FormClosing event to open LoginForm when Dashboard is closed
+    Private Sub Dashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        LoginForm.Show() ' Show the LoginForm when Dashboard is closed
     End Sub
 End Class
